@@ -1,0 +1,506 @@
+/*
+ * CV Information Extractor – Custom Styles
+ * =========================================
+ * Tailwind handles the bulk of styling. This file provides:
+ *   1. Reusable component utility classes referenced in HTML
+ *   2. Drop-zone drag-over state
+ *   3. Scrollbar styling for modals
+ *   4. Animation keyframes
+ *   5. Markdown-like text formatting inside extraction preview
+ */
+
+/* ─────────────────────────────────────────────
+   1. REUSABLE BUTTON & BADGE COMPONENTS
+───────────────────────────────────────────── */
+
+.btn-primary {
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-secondary:hover {
+  background: #E2E8F0;
+  transform: translateY(-1px);
+}
+
+.btn-outline-sm {
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid #D1D5DB;
+  background: #fff;
+  color: #374151;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.btn-outline-sm:hover {
+  border-color: #4F46E5;
+  color: #4F46E5;
+  background: #EEF2FF;
+  transform: translateY(-1px);
+}
+
+/* File format badges in drop zone */
+.badge-format {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #EEF2FF;
+  color: #4F46E5;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ─────────────────────────────────────────────
+   2. NAVIGATION BUTTON ACTIVE STATE
+───────────────────────────────────────────── */
+
+.nav-btn {
+  color: #6B7280;
+  background: transparent;
+}
+.nav-btn:hover {
+  background: #F3F4F6;
+  color: #1F2937;
+}
+.nav-btn.active {
+  background: #EEF2FF;
+  color: #4F46E5;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────
+   3. DROP ZONE
+───────────────────────────────────────────── */
+
+.drop-zone {
+  user-select: none;
+  outline: none;
+}
+.drop-zone.dragover {
+  border-color: #4F46E5 !important;
+  background: #EEF2FF !important;
+  transform: scale(1.005);
+}
+
+/* ─────────────────────────────────────────────
+   4. STAGED FILE LIST ITEMS
+───────────────────────────────────────────── */
+
+.staged-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  transition: border-color 0.15s;
+}
+.staged-item:hover {
+  border-color: #A5B4FC;
+}
+.staged-item .file-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.staged-item .file-icon.pdf  { background: #FEE2E2; color: #DC2626; }
+.staged-item .file-icon.docx { background: #DBEAFE; color: #2563EB; }
+.staged-item .file-icon.img  { background: #D1FAE5; color: #059669; }
+.staged-item .remove-btn {
+  margin-left: auto;
+  color: #9CA3AF;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.staged-item .remove-btn:hover {
+  color: #EF4444;
+}
+
+/* Status dots on staged items */
+.status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.pending  { background: #9CA3AF; }
+.status-dot.loading  { background: #F59E0B; animation: pulse-dot 1s infinite; }
+.status-dot.success  { background: #10B981; }
+.status-dot.error    { background: #EF4444; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ─────────────────────────────────────────────
+   5. RESULT CARDS
+───────────────────────────────────────────── */
+
+.result-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+.result-card:hover {
+  box-shadow: 0 8px 30px rgba(79, 70, 229, 0.12);
+  border-color: #A5B4FC;
+  transform: translateY(-2px);
+}
+
+.candidate-avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  background: #EEF2FF;
+  color: #4338CA;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.confidence-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.confidence-badge.High   { background: #D1FAE5; color: #065F46; }
+.confidence-badge.Medium { background: #FEF3C7; color: #92400E; }
+.confidence-badge.Low    { background: #FEE2E2; color: #991B1B; }
+
+/* ─────────────────────────────────────────────
+   6. KPI CARDS (Analytics)
+───────────────────────────────────────────── */
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.kpi-label {
+  font-size: 0.75rem;
+  color: #6B7280;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────────────
+   7. FILTER SELECT
+───────────────────────────────────────────── */
+
+.filter-select {
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid #D1D5DB;
+  background: #fff;
+  font-size: 0.82rem;
+  color: #374151;
+  outline: none;
+  transition: border-color 0.15s;
+  min-width: 120px;
+}
+.filter-select:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+/* ─────────────────────────────────────────────
+   8. DETAIL MODAL
+───────────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+.modal-box {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  animation: modal-in 0.2s ease;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(-16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-tab {
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #6B7280;
+  transition: background 0.15s, color 0.15s;
+}
+.modal-tab:hover {
+  background: #F3F4F6;
+  color: #1F2937;
+}
+.modal-tab.active {
+  background: #EEF2FF;
+  color: #4338CA;
+  font-weight: 600;
+}
+
+/* Scrollbar for modal content */
+#modal-content::-webkit-scrollbar { width: 5px; }
+#modal-content::-webkit-scrollbar-track { background: transparent; }
+#modal-content::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 999px; }
+
+/* ─────────────────────────────────────────────
+   9. MODAL CONTENT INNER COMPONENTS
+───────────────────────────────────────────── */
+
+.info-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #F3F4F6;
+}
+.info-row:last-child {
+  border-bottom: none;
+}
+.info-label {
+  min-width: 110px;
+  color: #9CA3AF;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.info-value {
+  color: #1F2937;
+  word-break: break-word;
+}
+.info-value a {
+  color: #4F46E5;
+  text-decoration: underline;
+}
+
+.section-block {
+  background: #F8FAFC;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.9rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.section-block h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.4rem;
+}
+.section-block p {
+  font-size: 0.82rem;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+.section-block ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  font-size: 0.8rem;
+  color: #4B5563;
+  margin-top: 0.3rem;
+}
+.section-block ul li {
+  margin-bottom: 0.2rem;
+}
+
+.warning-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  background: #FEF3C7;
+  color: #92400E;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────
+   10. SKILLS CHART (Analytics)
+───────────────────────────────────────────── */
+
+.chart-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+.chart-bar-label {
+  min-width: 100px;
+  color: #374151;
+  font-weight: 500;
+  truncate: true;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chart-bar-track {
+  flex: 1;
+  background: #F3F4F6;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+.chart-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4F46E5, #7C3AED);
+  transition: width 0.6s ease;
+}
+.chart-bar-count {
+  min-width: 24px;
+  text-align: right;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────
+   11. TOAST NOTIFICATION
+───────────────────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  animation: toast-in 0.25s ease;
+  max-width: 320px;
+}
+.toast.success { background: #10B981; }
+.toast.error   { background: #EF4444; }
+.toast.info    { background: #4F46E5; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   12. ERROR ALERT BOX
+───────────────────────────────────────────── */
+
+.error-alert {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background: #FFF5F5;
+  border: 1px solid #FED7D7;
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.83rem;
+  color: #C53030;
+}
+
+/* ─────────────────────────────────────────────
+   13. HEALTH STATUS DOT
+───────────────────────────────────────────── */
+
+#health-dot.ok      { background: #10B981; }
+#health-dot.error   { background: #EF4444; }
+#health-dot.loading { background: #F59E0B; animation: pulse-dot 1s infinite; }
+
+/* ─────────────────────────────────────────────
+   14. RESPONSIVE ADJUSTMENTS
+───────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .modal-box {
+    border-radius: 1rem;
+  }
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+  .modal-tab {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.6rem;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   15. EMPTY STATE PLACEHOLDER
+───────────────────────────────────────────── */
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #9CA3AF;
+}
+.empty-state svg {
+  margin: 0 auto 1rem;
+  opacity: 0.3;
+}

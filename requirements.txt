@@ -1,0 +1,28 @@
+# CV Information Extractor – Python Dependencies
+# ================================================
+# Install with: pip install -r requirements.txt
+
+# ── Core API Framework ──────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9     # Required for FastAPI file uploads
+
+# ── PDF Processing ──────────────────────────────
+pdfplumber==0.11.0           # Text extraction from text-based PDFs
+
+# ── DOCX Processing ─────────────────────────────
+python-docx==1.1.2           # Read Word documents including tables
+
+# ── OCR (Optional – for scanned PDFs & images) ──
+# Install tesseract-ocr system package first:
+#   Ubuntu/Debian: sudo apt-get install tesseract-ocr tesseract-ocr-ind
+#   Windows: https://github.com/UB-Mannheim/tesseract/wiki
+#   macOS:   brew install tesseract
+Pillow==10.3.0               # Image processing
+pytesseract==0.3.10          # Python wrapper for Tesseract OCR
+
+# ── Scanned PDF → Image conversion (for OCR fallback) ──
+PyMuPDF==1.24.3              # fitz: convert PDF pages to images
+
+# ── Utilities ───────────────────────────────────
+python-dateutil==2.9.0       # Flexible date parsing
